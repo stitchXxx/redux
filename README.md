@@ -11,7 +11,7 @@ Store 收到 Action 以后，必须给出一个新的 State，这样 View 才会
 
 redux 原理 （单项数据流）
 component----(dispatch)---> actions ----> store ---action&state--> reducers ---change state---> store --- 刷新 component
-
+http://www.ruanyifeng.com/blogimg/asset/2016/bg2016091802.jpg
 cnpm i redux react-redux -S
 
 ### immutable
