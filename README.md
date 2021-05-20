@@ -17,7 +17,6 @@ component----(dispatch)---> actions ----> store ---action&state--> reducers ---c
 cnpm i redux react-redux -S
 
 
-
 ### immutable
 immutable 深拷贝 修改不可变对象，响应式系统一定检测到数据更改，从而触发视图更新
 
