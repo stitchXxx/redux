@@ -59,7 +59,11 @@ immutable.js提供了十余种不可变的类型（List，Map，Set，Seq，Coll
 immutable.js的优缺点
     优点：降低mutable带来的复杂度，节省内存，拥抱函数式编程
     缺点：容易与原生对象混淆，由于api与原生不同，混用的话容易出错
-    
+为什么要使用immutable
+    在Rudux中因为深拷贝对性能的消耗太大了（用到了递归，逐层拷贝每个节点）。
+    但当你使用immutable数据的时候：只会拷贝你改变的节点，从而达到了节省性能。
+    总结：immutable的不可变性让纯函数更强大，每次都返回新的immutable的特性让程序员可以对其进行链式操作，用起来更方便。
+
 ![image](https://img-blog.csdnimg.cn/img_convert/6fdae931cf4aec5140614f0b99b05c85.gif)
 
 cnpm i immutable redux-immutable -S
