@@ -59,5 +59,7 @@ immutable.js提供了十余种不可变的类型（List，Map，Set，Seq，Coll
 immutable.js的优缺点
     优点：降低mutable带来的复杂度，节省内存，拥抱函数式编程
     缺点：容易与原生对象混淆，由于api与原生不同，混用的话容易出错
+    
+![image](https://img-blog.csdnimg.cn/img_convert/6fdae931cf4aec5140614f0b99b05c85.gif)
 
 cnpm i immutable redux-immutable -S
