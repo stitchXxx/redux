@@ -46,7 +46,6 @@ immutable.js提供了十余种不可变的类型（List，Map，Set，Seq，Coll
     console.log(imC.toJS()) //{a:1,b:2,c:3}
 
 8. 增删改查（所有操作都会返回新的值，不会修改原来值）
-9. 
     let immutableData = immutable.fromJS({ a:1, b:2, c: { d: 3 } });
     
     let data1 = immutableData.get('a') // data1 = 1
