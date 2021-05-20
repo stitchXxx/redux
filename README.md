@@ -1,70 +1,61 @@
-# Getting Started with Create React App
+### redux
+Store 
+就是保存数据的地方，你可以把它看成一个容器。整个应用只能有一个 Store。 Redux 提供createStore这个函数，用来生成 Store
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Action 
+就是 View 发出的通知，表示 State 应该要发生变化 Action 是一个对象。其中的type属性是必须的 { type:"xxxx" }
+改变 State 的唯一办法，就是使用 Action。它会运送数据到 Store，封装 action 以函数实现动态的action
 
-## Available Scripts
+Reducer
+Store 收到 Action 以后，必须给出一个新的 State，这样 View 才会发生变化。这种 State 的计算过程就叫做 Reducer，Reducer 是一个函数，它接受 Action 和当前 State 作为参数，返回一个新的 State。
 
-In the project directory, you can run:
+redux 原理 （单项数据流）
+component----(dispatch)---> actions ----> store ---action&state--> reducers ---change state---> store --- 刷新 component
 
-### `yarn start`
+cnpm i redux react-redux -S
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### immutable
+immutable 深拷贝 修改不可变对象，响应式系统一定检测到数据更改，从而触发视图更新
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+immutable.js ==> 解决修改对象或者数组，视图不刷新
 
-### `yarn test`
+把对象数组这些可变对象，更新为不可变对象 return {...state}
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+immutable.js提供了十余种不可变的类型（List，Map，Set，Seq，Collection，Range等）
 
-### `yarn build`
+## API 文档
+1. Map() 原生object转Map对象 (只会转换第一层，注意和fromJS区别) immutable.Map({name:'danny', age:18,a:{b:1}})
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+2. List() 原生array转List对象 (只会转换第一层，注意和fromJS区别) immutable.List([1,2,3,4,5])
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+3. fromJS() 原生js转immutable对象 (深度转换，会将内部嵌套的对象和数组全部转成immutable) immutable.fromJS([1,2,3,4,5]) //将原生array --> List immutable.fromJS({name:'danny', age:18}) //将原生object --> Map
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+4. toJS() immutable对象转原生js (深度转换，会将内部嵌套的Map和List全部转换成原生js) immutableData.toJS();
 
-### `yarn eject`
+5. 查看List或者map大小
+    immutableData.size 或者 immutableData.count()
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+6. is() 判断两个immutable对象是否相等 immutable.is(imA, imB);
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+7. merge() 对象合并 
+    let imA = immutable.fromJS({a:1,b:2});
+    let imB = immutable.fromJS({c:3});
+    let imC = imA.merge(imB);
+    console.log(imC.toJS()) //{a:1,b:2,c:3}
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+8. 增删改查（所有操作都会返回新的值，不会修改原来值）
+    let immutableData = immutable.fromJS({ a:1, b:2, c: { d: 3 } });
+    let data1 = immutableData.get('a') // data1 = 1
+    let data2 = immutableData.getIn(['c', 'd']) // data2 = 3 getIn用于深层结构访问 
+    let data3 = immutableData.set('a', 2); // data3中的 a = 2 
+    let data4 = immutableData.setIn(['c', 'd'], 4); //data4中的 d = 4 
+    let data5 = immutableData.update('a',function(x){return x+4}) //data5中的 a = 5
+    let data6 = immutableData.updateIn(['c', 'd'],function(x){return x+4}) //data6中的 d = 7 
+    let data7 = immutableData.delete('a') //data7中的 a 不存在 
+    let data8 = immutableData.deleteIn(['c', 'd']) //data8中的 d 不存在
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+immutable.js的优缺点
+    优点：降低mutable带来的复杂度，节省内存，拥抱函数式编程
+    缺点：容易与原生对象混淆，由于api与原生不同，混用的话容易出错
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+cnpm i immutable redux-immutable -S
