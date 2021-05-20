@@ -46,6 +46,7 @@ immutable.js提供了十余种不可变的类型（List，Map，Set，Seq，Coll
     console.log(imC.toJS()) //{a:1,b:2,c:3}
 
 8. 增删改查（所有操作都会返回新的值，不会修改原来值）
+
     let immutableData = immutable.fromJS({ a:1, b:2, c: { d: 3 } });
     
     let data1 = immutableData.get('a') // data1 = 1
@@ -57,16 +58,25 @@ immutable.js提供了十余种不可变的类型（List，Map，Set，Seq，Coll
     let data4 = immutableData.setIn(['c', 'd'], 4); //data4中的 d = 4 
     
     let data5 = immutableData.update('a',function(x){return x+4}) //data5中的 a = 5
+    
     let data6 = immutableData.updateIn(['c', 'd'],function(x){return x+4}) //data6中的 d = 7 
+    
     let data7 = immutableData.delete('a') //data7中的 a 不存在 
+    
     let data8 = immutableData.deleteIn(['c', 'd']) //data8中的 d 不存在
 
 immutable.js的优缺点
+
     优点：降低mutable带来的复杂度，节省内存，拥抱函数式编程
+    
     缺点：容易与原生对象混淆，由于api与原生不同，混用的话容易出错
+    
 为什么要使用immutable
+
     在Rudux中因为深拷贝对性能的消耗太大了（用到了递归，逐层拷贝每个节点）。
+    
     但当你使用immutable数据的时候：只会拷贝你改变的节点，从而达到了节省性能。
+    
     总结：immutable的不可变性让纯函数更强大，每次都返回新的immutable的特性让程序员可以对其进行链式操作，用起来更方便。
 
 ![image](https://img-blog.csdnimg.cn/img_convert/6fdae931cf4aec5140614f0b99b05c85.gif)
