@@ -62,9 +62,8 @@ immutable.js提供了十余种不可变的类型（List，Map，Set，Seq，Coll
     
     let data6 = immutableData.updateIn(['c', 'd'],function(x){return x+4}) //data6中的 d = 7 
     
-    let data7 = immutableData.delete('a') //data7中的 a 不存在 
-    
-    let data8 = immutableData.deleteIn(['c', 'd']) //data8中的 d 不存在
+let data7 = immutableData.delete('a') //data7中的 a 不存在 
+let data8 = immutableData.deleteIn(['c', 'd']) //data8中的 d 不存在
 
 immutable.js的优缺点
 
